@@ -216,8 +216,12 @@ use Illuminate\Support\Facades\DB;
 //});
 
 //Many to Many Relationship
-Route::get('/', function(){
-
-
-
-});
+//Route::get('/user/{id}/role', function($id){
+//
+//    $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+//    return $user;
+////    foreach($user->roles as $role){
+////        return $role->name;
+////    }
+//
+//});
