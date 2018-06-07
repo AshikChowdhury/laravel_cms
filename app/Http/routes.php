@@ -14,7 +14,10 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+use App\Photo;
+use App\Country;
 use App\Post;
+use App\Tag;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -225,3 +228,88 @@ use Illuminate\Support\Facades\DB;
 ////    }
 //
 //});
+
+//accessing the intermediate table/pivot table
+
+//Route::get('/user/pivot', function(){
+//
+//    $user = User::find(1);
+//
+//    foreach ($user->roles as $role){
+//        echo $role->pivot->created_at;
+//    }
+//
+//});
+//
+//Route::get('/user/country', function(){
+//
+//    $country = Country::find(8);
+//
+//    foreach ($country->posts as $post ){
+//
+//        return $post->title;
+//
+//    }
+//
+//});
+
+/*
+|=========================================
+|ELOQUENT Polymorphic relation
+|=========================================
+*/
+
+//Route::get('/user/photos', function(){
+//
+//    $user = User::find(1);
+//
+//    foreach ($user->photos as $photo){
+//        return $photo->path;
+//    }
+//
+//});
+//Route::get('/post/{id}/photos', function($id){
+//
+//$post = Post::find($id);
+//
+//foreach ($post->photos as $photo){
+//    echo $photo->path. "<br>";
+//}
+//
+//});
+
+//Route::get('/photo/{id}/post', function($id){
+//
+//    $photo = Photo::findOrFail($id);
+//
+//    return $photo->imageable;
+//
+//});
+
+//Polymorphic many to many
+
+Route::get('/post/tag', function (){
+    $post = Post::find(2);
+
+    foreach ($post->tags as $tag){
+        echo $tag->name;
+    }
+});
+
+Route::get('/tag/post', function (){
+    
+    $tag = Tag::find(1);
+
+    foreach ($tag->posts as $post){
+
+        echo $post->title;
+    }
+    
+});
+
+Route::get('/tags', function(){
+    $tag = Post::find(1);
+    foreach ($tag->tags as $tag){
+        echo $tag->name;
+    }
+});
