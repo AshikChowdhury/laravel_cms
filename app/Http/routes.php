@@ -11,9 +11,9 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 use App\Photo;
 use App\Country;
 use App\Post;
@@ -288,28 +288,45 @@ use Illuminate\Support\Facades\DB;
 
 //Polymorphic many to many
 
-Route::get('/post/tag', function (){
-    $post = Post::find(2);
+//Route::get('/post/tag', function (){
+//    $post = Post::find(2);
+//
+//    foreach ($post->tags as $tag){
+//        echo $tag->name;
+//    }
+//});
+//
+//Route::get('/tag/post', function (){
+//
+//    $tag = Tag::find(1);
+//
+//    foreach ($tag->posts as $post){
+//
+//        echo $post->title;
+//    }
+//
+//});
+//
+//Route::get('/tags', function(){
+//    $tag = Post::find(1);
+//    foreach ($tag->tags as $tag){
+//        echo $tag->name;
+//    }
+//});
 
-    foreach ($post->tags as $tag){
-        echo $tag->name;
-    }
-});
+/*
+|=========================================
+|CRUD APPLICATION
+|=========================================
+*/
 
-Route::get('/tag/post', function (){
-    
-    $tag = Tag::find(1);
 
-    foreach ($tag->posts as $post){
+Route::group(['middleware'=>'web'], function(){
 
-        echo $post->title;
-    }
-    
-});
+    Route::resource('/posts', 'PostsController');
 
-Route::get('/tags', function(){
-    $tag = Post::find(1);
-    foreach ($tag->tags as $tag){
-        echo $tag->name;
-    }
+    Route::get('/dates', function(){
+
+    });
+
 });
