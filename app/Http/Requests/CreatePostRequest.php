@@ -25,7 +25,7 @@ class CreatePostRequest extends Request
     {
         return [
             //
-            'title'=> 'required|unique:posts|max:5'
+//            'title'=> 'required|unique:posts|max:5'
         ];
     }
 }

@@ -17,8 +17,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
-        $posts = Post::find([1,2,3,4,5,6,7,8,9,10]);
+
+//        $posts = Post::latest();
+        $posts = Post::find([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]);
+
 //        dd($posts);
         return view('posts.index', compact('posts'));
     }
@@ -42,7 +44,31 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        //
+
+        $input = $request->all();
+
+        if ($file = $request->file('file')){
+            $name = $file->getClientOriginalName();
+            $file->move('images',$name);
+
+            $input['path'] = $name;
+        }
+        Post::create($input);
+
+
+
+//        $file = $request->file('file');
+//        echo "<br>";
+//        echo $file->getClientOriginalName();
+//        echo $file->getClientSize();
+
+//        $file = $request->file('file');
+//
+//        echo "<br>";
+//
+//        echo $file->getClientOriginalName();
+
+
 //        return $request->get('title');
 //        return $request->title;
 //        $this->validate($request, [
@@ -51,9 +77,9 @@ class PostsController extends Controller
 //
 //        ]);
 
-        Post::create($request->all());
-
-        return redirect('/posts');
+//        Post::create($request->all());
+//
+//        return redirect('/posts');
 //        $input = $request->all();
 //        $input['title'] = $request->title;
 //        Post::create([$request->all()]);

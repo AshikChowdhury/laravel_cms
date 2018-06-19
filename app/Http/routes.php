@@ -11,15 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 use App\Photo;
 use App\Country;
 use App\Post;
 use App\Tag;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 //Route::get('/contact', 'PostsController@contact');
 
@@ -326,6 +329,34 @@ Route::group(['middleware'=>'web'], function(){
     Route::resource('/posts', 'PostsController');
 
     Route::get('/dates', function(){
+
+        $date = new DateTime('+1 Day');
+        echo $date->format('M-d-Y')."<br>";
+
+        echo Carbon::now()->addDays(10)->diffForHumans()."<br>";
+
+        echo Carbon::now()->subMonths(5)->diffForHumans()."<br>";
+
+        echo Carbon::now()->yesterday()->diffForHumans()."<br>";
+
+
+    });
+
+    Route::get('/get_name', function(){
+
+        $user = User::findOrFail(1);
+
+            echo $user->name;
+
+    });
+
+    Route::get('/set_name', function(){
+
+        $user = User::findOrFail(1);
+
+        $user->name = "Norain";
+
+        $user->save();
 
     });
 
